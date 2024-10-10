@@ -38,6 +38,7 @@ st.header("Ingrese los datos del estudiante")
 application_mode = st.selectbox("Modo de Aplicación", list(range(1, 19)))
 age_at_enrollment = st.number_input("Edad al ingreso", min_value=15, max_value=100)  # Ajusta según el rango
 tuition_fees = st.selectbox("¿Cuotas al día?", [0, 1])  # 0 para No, 1 para Sí
+course = st.selectbox("Curso", list(range(1, 17)))
 curricular_units_1st_sem_approved = st.number_input("Unidades curriculares 1er sem (aprobadas)", min_value=0)
 curricular_units_1st_sem_grade = st.number_input("Unidades curriculares 1er sem (calificación)", min_value=0.0)
 curricular_units_2nd_sem_approved = st.number_input("Unidades curriculares 2do sem (aprobadas)", min_value=0)
@@ -57,6 +58,7 @@ if st.button("Predecir"):
         "Curricular units 2nd sem (grade)": curricular_units_2nd_sem_grade,
         "Curricular units 1st sem (evaluations)": curricular_units_1st_sem_evaluations,
         "Curricular units 2nd sem (evaluations)": curricular_units_2nd_sem_evaluations,
+        "Course": course,
     }
 
     # Realizar la predicción
