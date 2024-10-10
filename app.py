@@ -27,14 +27,14 @@ else:
 
 # Función para predecir
 def predict(input_data):
-    input_df = pd.DataFrame(input_data, index=[0])  # Agregar index=[0] para crear un DataFrame válido
+    input_df = pd.DataFrame(input_data, index=[0])  # Crear un DataFrame válido
     predictions = loaded_model.predict(input_df)
     return predictions
 
 # Ingreso de datos
 st.header("Ingrese los datos del estudiante")
 
-# Campos de entrada según las características conservadas
+# Campos de entrada según las características filtradas
 application_mode = st.selectbox("Modo de Aplicación", list(range(1, 19)))
 age_at_enrollment = st.number_input("Edad al ingreso", min_value=15, max_value=100)  # Ajusta según el rango
 tuition_fees = st.selectbox("¿Cuotas al día?", [0, 1])  # 0 para No, 1 para Sí
@@ -42,6 +42,8 @@ curricular_units_1st_sem_approved = st.number_input("Unidades curriculares 1er s
 curricular_units_1st_sem_grade = st.number_input("Unidades curriculares 1er sem (calificación)", min_value=0.0)
 curricular_units_2nd_sem_approved = st.number_input("Unidades curriculares 2do sem (aprobadas)", min_value=0)
 curricular_units_2nd_sem_grade = st.number_input("Unidades curriculares 2do sem (calificación)", min_value=0.0)
+curricular_units_1st_sem_evaluations = st.number_input("Unidades curriculares 1er sem (evaluaciones)", min_value=0)
+curricular_units_2nd_sem_evaluations = st.number_input("Unidades curriculares 2do sem (evaluaciones)", min_value=0)
 
 # Botón para hacer la predicción
 if st.button("Predecir"):
@@ -53,6 +55,8 @@ if st.button("Predecir"):
         "Curricular units 1st sem (grade)": curricular_units_1st_sem_grade,
         "Curricular units 2nd sem (approved)": curricular_units_2nd_sem_approved,
         "Curricular units 2nd sem (grade)": curricular_units_2nd_sem_grade,
+        "Curricular units 1st sem (evaluations)": curricular_units_1st_sem_evaluations,
+        "Curricular units 2nd sem (evaluations)": curricular_units_2nd_sem_evaluations,
     }
 
     # Realizar la predicción
