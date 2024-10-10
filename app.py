@@ -4,7 +4,7 @@ import joblib
 import os
 
 # Título de la aplicación
-st.title("Predicción de Resultados Educativos")
+st.title("Predicción de Resultados Educativos (con el mejor modelo SVM (Gaussiano))")
 
 # Información adicional
 st.markdown("""
@@ -35,29 +35,29 @@ def predict(input_data):
 st.header("Ingrese los datos del estudiante")
 
 # Campos de entrada según las características filtradas
-application_mode = st.selectbox("Modo de Aplicación", list(range(1, 19)))
-age_at_enrollment = st.number_input("Edad al ingreso", min_value=15, max_value=100)  # Ajusta según el rango
-tuition_fees = st.selectbox("¿Cuotas al día?", [0, 1])  # 0 para No, 1 para Sí
-course = st.selectbox("Curso", list(range(1, 17)))
-curricular_units_1st_sem_approved = st.number_input("Unidades curriculares 1er sem (aprobadas)", min_value=0)
-curricular_units_1st_sem_grade = st.number_input("Unidades curriculares 1er sem (calificación)", min_value=0.0)
 curricular_units_2nd_sem_approved = st.number_input("Unidades curriculares 2do sem (aprobadas)", min_value=0)
+curricular_units_1st_sem_approved = st.number_input("Unidades curriculares 1er sem (aprobadas)", min_value=0)
 curricular_units_2nd_sem_grade = st.number_input("Unidades curriculares 2do sem (calificación)", min_value=0.0)
-curricular_units_1st_sem_evaluations = st.number_input("Unidades curriculares 1er sem (evaluaciones)", min_value=0)
+tuition_fees = st.selectbox("¿Cuotas al día?", [0, 1])  # 0 para No, 1 para Sí
 curricular_units_2nd_sem_evaluations = st.number_input("Unidades curriculares 2do sem (evaluaciones)", min_value=0)
+application_mode = st.selectbox("Modo de Aplicación", list(range(1, 19)))
+curricular_units_1st_sem_grade = st.number_input("Unidades curriculares 1er sem (calificación)", min_value=0.0)
+age_at_enrollment = st.number_input("Edad al ingreso", min_value=15, max_value=100)  # Ajusta según el rango
+curricular_units_1st_sem_evaluations = st.number_input("Unidades curriculares 1er sem (evaluaciones)", min_value=0)
+course = st.selectbox("Curso", list(range(1, 17)))
 
 # Botón para hacer la predicción
 if st.button("Predecir"):
     input_data = {
-        "Application mode": application_mode,
-        "Age at enrollment": age_at_enrollment,
-        "Tuition fees up to date": tuition_fees,
-        "Curricular units 1st sem (approved)": curricular_units_1st_sem_approved,
-        "Curricular units 1st sem (grade)": curricular_units_1st_sem_grade,
         "Curricular units 2nd sem (approved)": curricular_units_2nd_sem_approved,
+        "Curricular units 1st sem (approved)": curricular_units_1st_sem_approved,
         "Curricular units 2nd sem (grade)": curricular_units_2nd_sem_grade,
-        "Curricular units 1st sem (evaluations)": curricular_units_1st_sem_evaluations,
+        "Tuition fees up to date": tuition_fees,
         "Curricular units 2nd sem (evaluations)": curricular_units_2nd_sem_evaluations,
+        "Application mode": application_mode,
+        "Curricular units 1st sem (grade)": curricular_units_1st_sem_grade,
+        "Age at enrollment": age_at_enrollment,
+        "Curricular units 1st sem (evaluations)": curricular_units_1st_sem_evaluations,
         "Course": course,
     }
 
