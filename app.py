@@ -31,6 +31,13 @@ def predict(input_data):
     predictions = loaded_model.predict(input_df)
     return predictions
 
+# Definir un mapeo de índices a nombres de clases
+class_names = {
+    0: "Dropout",
+    1: "Enrolled",
+    2: "Graduate"
+}
+
 # Ingreso de datos
 st.header("Ingrese los datos del estudiante")
 
@@ -64,8 +71,11 @@ if st.button("Predecir"):
     # Realizar la predicción
     try:
         prediction = predict(input_data)
+        # Mapear la predicción binaria a nombres de clases
+        result = [class_names[i] for i in range(len(prediction[0])) if prediction[0][i] == 1]
+
         # Mostrar resultados
-        st.success(f"La predicción es: {prediction[0]}")
+        st.success(f"La predicción es: {', '.join(result) if result else 'Ninguna clase'}")
     except Exception as e:
         st.error(f"Ocurrió un error al realizar la predicción: {e}")
 
